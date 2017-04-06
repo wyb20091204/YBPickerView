@@ -7,18 +7,43 @@
 //
 
 #import "YBDatePickerView.h"
-#define RGBA(r, g, b, a) ([UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a])
+
+
+#define ColorForTopView    [UIColor colorWithHexString:@"#4e6aa5"]
+#define ColorForBcakground [[UIColor blackColor] colorWithAlphaComponent:0.3]
+
+#define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+
+static const CGFloat topViewHeight = 38;
+static const CGFloat buttonWidth = 60;
+static const CGFloat animationDuration = 0.3;
+static const NSInteger buttonFontSize = 14;
+
+
+
+@interface YBDatePickerView ()
+
+@property (nonatomic) UIDatePicker *datePicker;
+@property (nonatomic) UIButton *cancelButton;
+@property (nonatomic) UIButton *sureButton;
+@property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UIView *topView;
+@end
 
 @implementation YBDatePickerView
-
-
-
+- (instancetype)initWithTitle:(NSString *)title selectDate:(NSDate *)selectDate target:(id)target action:(SEL)action{
+    
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if (self = [super initWithFrame:frame]) {
-        [self setupUI];
-        [self defaultConfig];
+       
     }
     return self;
 }
@@ -30,8 +55,8 @@
     CGRect datePickerFrame = CGRectMake(0, 40, self.frame.size.width, 216);
     UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:datePickerFrame];
     datePicker.datePickerMode = UIDatePickerModeDate;
-//    datePicker.maximumDate = self.maximumDate;
-//    datePicker.minimumDate = self.minimumDate;
+    datePicker.maximumDate = self.maximumDate;
+    datePicker.minimumDate = self.minimumDate;
 //    datePicker.minuteInterval = self.minuteInterval;
 //    datePicker.calendar = self.calendar;
 //    datePicker.timeZone = self.timeZone;
@@ -68,21 +93,30 @@
   
 }
 
+- (void)finishSelectAction:(UIButton *)button{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(yb_didSelectedDateResultWithDate:)]) {
+        [self.delegate yb_didSelectedDateResultWithDate:self.selectDate];
+    }
+}
+
+- (void)cancelSelectAction:(UIButton *)button{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(yb_cancelButtonClicked)]) {
+        [self.delegate yb_cancelButtonClicked];
+    }
+    [self dismiss];
+}
 
 
-
--(void)show{
+-(void)showYBDatePickerView{
     
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [UIView animateWithDuration:.3 animations:^{
-        self.backgroundColor = RGBA(0, 0, 0, 0.4);
         [self layoutIfNeeded];
     }];
 }
 
 -(void)dismiss {
     [UIView animateWithDuration:.3 animations:^{
-        self.backgroundColor = RGBA(0, 0, 0, 0);
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -92,12 +126,10 @@
 - (CGFloat)height {
     return self.frame.size.height;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self dismiss];
 }
-*/
 
 @end

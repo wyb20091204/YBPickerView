@@ -34,7 +34,7 @@
 - (IBAction)dateButtonAction:(id)sender {
     
     YBDatePickerView *datePick = [[YBDatePickerView alloc] init];
-    [datePick show];
+    [datePick showYBDatePickerView];
     
     
 }
