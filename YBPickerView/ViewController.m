@@ -10,7 +10,7 @@
 #import "TimeUtils.h"
 #import "YBDatePickerView.h"
 
-@interface ViewController ()
+@interface ViewController ()<YBDatePickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
@@ -34,9 +34,15 @@
 - (IBAction)dateButtonAction:(id)sender {
     
     YBDatePickerView *datePick = [[YBDatePickerView alloc] init];
+    datePick.delegate = self;
     [datePick showYBDatePickerView];
     
     
+}
+
+- (void)yb_didSelectedDateResultWithDate:(NSDate *)selectedDate{
+    NSUInteger selectedTime = [selectedDate timeIntervalSince1970];
+    self.dateLabel.text = [TimeUtils getDateStringOfTime:selectedTime];
 }
 
 - (IBAction)startTimeButtonAction:(id)sender {

@@ -7,25 +7,28 @@
 //
 
 #import "YBDatePickerView.h"
+#import "UIImage+Color.h"
+#import <Masonry.h>
+#import "TimeUtils.h"
 
-
-#define ColorForTopView    [UIColor colorWithHexString:@"#4e6aa5"]
+//#define RGBA(r, g, b, a) ([UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a])
+#define ColorForTopView    [UIColor colorWithRed:78/255.0 green:106/255.0 blue:165/255.0 alpha:1]
 #define ColorForBcakground [[UIColor blackColor] colorWithAlphaComponent:0.3]
+#define textFont [UIFont systemFontOfSize:14]
 
 #define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
 #define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+
 
 static const CGFloat topViewHeight = 38;
 static const CGFloat buttonWidth = 60;
 static const CGFloat pickViewHeitht = 150;
 static const CGFloat animationDuration = 0.3;
-static const NSInteger buttonFontSize = 14;
-
 
 
 
 @interface YBDatePickerView ()
-
+@property (nonatomic) UIView *baseBackView;
 @property (nonatomic) UIDatePicker *datePicker;
 @property (nonatomic) UIButton *cancelButton;
 @property (nonatomic) UIButton *sureButton;
@@ -51,19 +54,76 @@ static const NSInteger buttonFontSize = 14;
 
 
 - (void)setupSubviews{
+    self.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    self.backgroundColor = ColorForBcakground;
+
+    _baseBackView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight,kScreenWidth, pickViewHeitht + topViewHeight)];
+    _baseBackView.backgroundColor = [UIColor whiteColor];
     
-    UIView *baseBackView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight,kScreenWidth, pickViewHeitht + topViewHeight)];
+    UIView *topView = [[UIView alloc] init];
+    [_baseBackView addSubview:topView];
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        WithFrame:CGRectMake(0, topViewHeight, kScreenWidth, topViewHeight)
+        make.top.equalTo(_baseBackView);
+        make.leading.and.trailing.equalTo(_baseBackView);
+        make.height.mas_equalTo(topViewHeight);
+    }];
+    topView.backgroundColor = ColorForTopView;
+    [_baseBackView addSubview:topView];
     
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, topViewHeight, kScreenWidth, topViewHeight)];
+    
+    _cancelButton = [self setButtonWithTitle:@"取消" isLeft:YES supView:topView action:(@selector(cancelSelectAction:))];
+    _sureButton   = [self setButtonWithTitle:@"完成" isLeft:NO supView:topView action:@selector(finishSelectAction:)];
     
     
+    _titleLabel = [[UILabel alloc] init];
+    [topView addSubview:_titleLabel];
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(topView);
+    }];
+    _titleLabel.font = textFont;
+    _titleLabel.text = @"选择时间";
+    _titleLabel.textColor = [UIColor whiteColor];
     
     
-    [baseBackView addSubview:topView];
+    _datePicker = [[UIDatePicker alloc] init];
+    [_baseBackView addSubview:_datePicker];
+    [_datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(topView.mas_bottom);
+        make.leading.and.trailing.equalTo(topView);
+        make.height.mas_equalTo(pickViewHeitht);
+    }];
+    _datePicker.datePickerMode = UIDatePickerModeDate;
+    _datePicker.maximumDate = self.maximumDate;
+    _datePicker.minimumDate = self.minimumDate;
+    [_datePicker addTarget:self action:@selector(eventForDatePicker:) forControlEvents:UIControlEventValueChanged];
+    [_datePicker setDate:[NSDate dateWithTimeIntervalSince1970:[TimeUtils getTimestampNow]] animated:YES];
     
     
-    
-    
+    [self addSubview:_baseBackView];
+}
+
+
+- (UIButton *)setButtonWithTitle:(NSString *)title isLeft:(BOOL)isLeft supView:(UIView *)supView action:(SEL)action{
+    UIButton *button = [[UIButton alloc] init];
+    [supView addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(supView);
+        if (isLeft) {
+            make.leading.equalTo(supView);
+        } else {
+            make.trailing.equalTo(supView);
+        }
+        make.size.mas_equalTo(CGSizeMake(buttonWidth, topViewHeight));
+    }];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.titleLabel.font = textFont;
+    [button setBackgroundImage:[UIImage imageWithColor:ColorForTopView size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:ColorForTopView forState:UIControlStateHighlighted];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    return button;
 }
 
 -(void)setupUI {
@@ -98,23 +158,22 @@ static const NSInteger buttonFontSize = 14;
     [self addSubview:datePicker];
     
 }
-- (void)eventForDatePicker:(id)sender
-{
-//    if (!sender || ![sender isKindOfClass:[UIDatePicker class]])
-//        return;
-//    UIDatePicker *datePicker = (UIDatePicker *)sender;
-//    self.selectedDate = datePicker.date;
-//    self.countDownDuration = datePicker.countDownDuration;
-}
--(void)defaultConfig {
+
+- (void)eventForDatePicker:(UIDatePicker *)picker{
+    NSInteger selectDate = [picker.date timeIntervalSince1970];
     
-  
+    NSLog(@"\n%@    \n%@\n\n",picker.date,self.datePicker.date);
+    NSLog(@"\n%@",[TimeUtils getDateStringOfTime:selectDate]);
+    
+    
 }
+
 
 - (void)finishSelectAction:(UIButton *)button{
     if (self.delegate && [self.delegate respondsToSelector:@selector(yb_didSelectedDateResultWithDate:)]) {
-        [self.delegate yb_didSelectedDateResultWithDate:self.selectDate];
+        [self.delegate yb_didSelectedDateResultWithDate:self.datePicker.date];
     }
+    [self dismiss];
 }
 
 - (void)cancelSelectAction:(UIButton *)button{
@@ -128,22 +187,24 @@ static const NSInteger buttonFontSize = 14;
 -(void)showYBDatePickerView{
     
     [[UIApplication sharedApplication].keyWindow addSubview:self];
-    [UIView animateWithDuration:.3 animations:^{
-        [self layoutIfNeeded];
+    [UIView animateWithDuration:animationDuration animations:^{
+        CGRect tempRect = _baseBackView.frame;
+        tempRect.origin.y = kScreenHeight - _baseBackView.frame.size.height;
+        _baseBackView.frame= tempRect;
     }];
 }
 
 -(void)dismiss {
     [UIView animateWithDuration:.3 animations:^{
-        [self layoutIfNeeded];
+        CGRect tempRect = _baseBackView.frame;
+        tempRect.origin.y = kScreenHeight;
+        _baseBackView.frame= tempRect;
     } completion:^(BOOL finished) {
         [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self removeFromSuperview];
     }];
 }
-- (CGFloat)height {
-    return self.frame.size.height;
-}
+
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

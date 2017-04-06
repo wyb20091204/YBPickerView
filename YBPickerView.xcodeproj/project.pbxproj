@@ -13,6 +13,7 @@
 		1A0DB6F51E94874100CA4F43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DB6F31E94874100CA4F43 /* Main.storyboard */; };
 		1A0DB6F71E94874100CA4F43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DB6F61E94874100CA4F43 /* Assets.xcassets */; };
 		1A0DB6FA1E94874100CA4F43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DB6F81E94874100CA4F43 /* LaunchScreen.storyboard */; };
+		1AABB6871E960A99009A137B /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB6861E960A99009A137B /* UIImage+Color.m */; };
 		1ABFF7B61E94C06D001AA498 /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABFF7B41E94C06D001AA498 /* TimeUtils.m */; };
 		1AF4E65B1E94E5B8000D850E /* YBDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4E65A1E94E5B8000D850E /* YBDatePickerView.m */; };
 		6B3A5E4D6541E4256BC3466F /* libPods-YBPickerView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9313F83E03BCFC8DD1C413 /* libPods-YBPickerView.a */; };
@@ -29,6 +30,8 @@
 		1A0DB6F61E94874100CA4F43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A0DB6F91E94874100CA4F43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A0DB6FB1E94874100CA4F43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AABB6851E960A99009A137B /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		1AABB6861E960A99009A137B /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		1ABFF7B41E94C06D001AA498 /* TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
 		1ABFF7B51E94C06D001AA498 /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtils.h; sourceTree = "<group>"; };
 		1AF4E6591E94E5B8000D850E /* YBDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBDatePickerView.h; sourceTree = "<group>"; };
@@ -83,6 +86,8 @@
 				1A0DB6FB1E94874100CA4F43 /* Info.plist */,
 				1ABFF7B51E94C06D001AA498 /* TimeUtils.h */,
 				1ABFF7B41E94C06D001AA498 /* TimeUtils.m */,
+				1AABB6851E960A99009A137B /* UIImage+Color.h */,
+				1AABB6861E960A99009A137B /* UIImage+Color.m */,
 				1A0DB6EA1E94874100CA4F43 /* Supporting Files */,
 			);
 			path = YBPickerView;
@@ -239,6 +244,7 @@
 				1A0DB6F21E94874100CA4F43 /* ViewController.m in Sources */,
 				1AF4E65B1E94E5B8000D850E /* YBDatePickerView.m in Sources */,
 				1A0DB6EF1E94874100CA4F43 /* AppDelegate.m in Sources */,
+				1AABB6871E960A99009A137B /* UIImage+Color.m in Sources */,
 				1ABFF7B61E94C06D001AA498 /* TimeUtils.m in Sources */,
 				1A0DB6EC1E94874100CA4F43 /* main.m in Sources */,
 			);
