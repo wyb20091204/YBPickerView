@@ -11,7 +11,6 @@
 #import <Masonry.h>
 #import "TimeUtils.h"
 
-//#define RGBA(r, g, b, a) ([UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a])
 #define ColorForTopView    [UIColor colorWithRed:78/255.0 green:106/255.0 blue:165/255.0 alpha:1]
 #define ColorForBcakground [[UIColor blackColor] colorWithAlphaComponent:0.3]
 #define textFont [UIFont systemFontOfSize:14]
@@ -63,7 +62,6 @@ static const CGFloat animationDuration = 0.3;
     UIView *topView = [[UIView alloc] init];
     [_baseBackView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        WithFrame:CGRectMake(0, topViewHeight, kScreenWidth, topViewHeight)
         make.top.equalTo(_baseBackView);
         make.leading.and.trailing.equalTo(_baseBackView);
         make.height.mas_equalTo(topViewHeight);
@@ -96,6 +94,12 @@ static const CGFloat animationDuration = 0.3;
     _datePicker.datePickerMode = UIDatePickerModeDate;
     _datePicker.maximumDate = self.maximumDate;
     _datePicker.minimumDate = self.minimumDate;
+    
+    //    datePicker.minuteInterval = self.minuteInterval;
+    //    datePicker.calendar = self.calendar;
+    //    datePicker.timeZone = self.timeZone;
+    //    datePicker.locale = self.locale;
+    
     [_datePicker addTarget:self action:@selector(eventForDatePicker:) forControlEvents:UIControlEventValueChanged];
     [_datePicker setDate:[NSDate dateWithTimeIntervalSince1970:[TimeUtils getTimestampNow]] animated:YES];
     
@@ -124,39 +128,6 @@ static const CGFloat animationDuration = 0.3;
     [button setTitleColor:ColorForTopView forState:UIControlStateHighlighted];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     return button;
-}
-
--(void)setupUI {
-    //self.themeColor = [UIColor colorFromHexRGB:@"#f7b639"];
-    
-    
-    CGRect datePickerFrame = CGRectMake(0, 40, self.frame.size.width, 216);
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:datePickerFrame];
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    datePicker.maximumDate = self.maximumDate;
-    datePicker.minimumDate = self.minimumDate;
-//    datePicker.minuteInterval = self.minuteInterval;
-//    datePicker.calendar = self.calendar;
-//    datePicker.timeZone = self.timeZone;
-//    datePicker.locale = self.locale;
-    
-    // if datepicker is set with a date in countDownMode then
-    // 1h is added to the initial countdown
-    
-//    [datePicker setDate:self.selectedDate animated:NO];
-    
-    [datePicker addTarget:self action:@selector(eventForDatePicker:) forControlEvents:UIControlEventValueChanged];
-    
-    //need to keep a reference to the picker so we can clear the DataSource / Delegate when dismissing (not used in this picker, but just in case somebody uses this as a template for another picker)
-//    self.pickerView = datePicker;
-
-    
-    
-    
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
-    
-    [self addSubview:datePicker];
-    
 }
 
 - (void)eventForDatePicker:(UIDatePicker *)picker{
