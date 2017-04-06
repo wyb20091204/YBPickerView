@@ -165,7 +165,6 @@ static const CGFloat animationDuration = 0.3;
     NSLog(@"\n%@    \n%@\n\n",picker.date,self.datePicker.date);
     NSLog(@"\n%@",[TimeUtils getDateStringOfTime:selectDate]);
     
-    
 }
 
 

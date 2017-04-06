@@ -14,7 +14,7 @@
 		1A0DB6F71E94874100CA4F43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DB6F61E94874100CA4F43 /* Assets.xcassets */; };
 		1A0DB6FA1E94874100CA4F43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DB6F81E94874100CA4F43 /* LaunchScreen.storyboard */; };
 		1AABB6871E960A99009A137B /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB6861E960A99009A137B /* UIImage+Color.m */; };
-		1ABFF7B61E94C06D001AA498 /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABFF7B41E94C06D001AA498 /* TimeUtils.m */; };
+		1AABB68A1E961449009A137B /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AABB6891E961449009A137B /* TimeUtils.m */; };
 		1AF4E65B1E94E5B8000D850E /* YBDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4E65A1E94E5B8000D850E /* YBDatePickerView.m */; };
 		6B3A5E4D6541E4256BC3466F /* libPods-YBPickerView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9313F83E03BCFC8DD1C413 /* libPods-YBPickerView.a */; };
 /* End PBXBuildFile section */
@@ -32,8 +32,8 @@
 		1A0DB6FB1E94874100CA4F43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AABB6851E960A99009A137B /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		1AABB6861E960A99009A137B /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
-		1ABFF7B41E94C06D001AA498 /* TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
-		1ABFF7B51E94C06D001AA498 /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtils.h; sourceTree = "<group>"; };
+		1AABB6881E961449009A137B /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtils.h; sourceTree = "<group>"; };
+		1AABB6891E961449009A137B /* TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
 		1AF4E6591E94E5B8000D850E /* YBDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBDatePickerView.h; sourceTree = "<group>"; };
 		1AF4E65A1E94E5B8000D850E /* YBDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBDatePickerView.m; sourceTree = "<group>"; };
 		3C9313F83E03BCFC8DD1C413 /* libPods-YBPickerView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YBPickerView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,8 +84,8 @@
 				1A0DB6F61E94874100CA4F43 /* Assets.xcassets */,
 				1A0DB6F81E94874100CA4F43 /* LaunchScreen.storyboard */,
 				1A0DB6FB1E94874100CA4F43 /* Info.plist */,
-				1ABFF7B51E94C06D001AA498 /* TimeUtils.h */,
-				1ABFF7B41E94C06D001AA498 /* TimeUtils.m */,
+				1AABB6881E961449009A137B /* TimeUtils.h */,
+				1AABB6891E961449009A137B /* TimeUtils.m */,
 				1AABB6851E960A99009A137B /* UIImage+Color.h */,
 				1AABB6861E960A99009A137B /* UIImage+Color.m */,
 				1A0DB6EA1E94874100CA4F43 /* Supporting Files */,
@@ -245,7 +245,7 @@
 				1AF4E65B1E94E5B8000D850E /* YBDatePickerView.m in Sources */,
 				1A0DB6EF1E94874100CA4F43 /* AppDelegate.m in Sources */,
 				1AABB6871E960A99009A137B /* UIImage+Color.m in Sources */,
-				1ABFF7B61E94C06D001AA498 /* TimeUtils.m in Sources */,
+				1AABB68A1E961449009A137B /* TimeUtils.m in Sources */,
 				1A0DB6EC1E94874100CA4F43 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
