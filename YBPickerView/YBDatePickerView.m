@@ -17,8 +17,10 @@
 
 static const CGFloat topViewHeight = 38;
 static const CGFloat buttonWidth = 60;
+static const CGFloat pickViewHeitht = 150;
 static const CGFloat animationDuration = 0.3;
 static const NSInteger buttonFontSize = 14;
+
 
 
 
@@ -40,17 +42,33 @@ static const NSInteger buttonFontSize = 14;
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    
-    if (self = [super initWithFrame:frame]) {
-       
+- (instancetype)init{
+    if (self = [super init]) {
+        [self setupSubviews];
     }
     return self;
 }
+
+
+- (void)setupSubviews{
+    
+    UIView *baseBackView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight,kScreenWidth, pickViewHeitht + topViewHeight)];
+    
+    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, topViewHeight, kScreenWidth, topViewHeight)];
+    
+    
+    
+    
+    [baseBackView addSubview:topView];
+    
+    
+    
+    
+}
+
 -(void)setupUI {
     //self.themeColor = [UIColor colorFromHexRGB:@"#f7b639"];
     
-    //点击背景是否影藏
     
     CGRect datePickerFrame = CGRectMake(0, 40, self.frame.size.width, 216);
     UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:datePickerFrame];
