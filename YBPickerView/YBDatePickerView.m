@@ -32,7 +32,6 @@ static const CGFloat animationDuration = 0.3;
 @property (nonatomic) UIButton *cancelButton;
 @property (nonatomic) UIButton *sureButton;
 @property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UIView *topView;
 @end
 
 @implementation YBDatePickerView
